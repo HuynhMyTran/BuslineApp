@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "TBApp",
+    "slug": "TBApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "TBApp"
+}
