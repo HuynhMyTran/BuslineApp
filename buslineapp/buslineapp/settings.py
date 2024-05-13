@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import mimetypes
 from pathlib import Path
 
+import cloudinary_storage
+
+mimetypes.add_type("application/javascript", ".js", True)
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,6 +41,11 @@ INSTALLED_APPS = [
     'buslines.apps.BuslinesConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'cloudinary',
+    'cloudinary_storage',
+    'rest_framework',
+    'drf_yasg',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'buslineapp.urls'
@@ -74,13 +83,13 @@ WSGI_APPLICATION = 'buslineapp.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'buslinedb',
-            'USER': 'root',
-            'PASSWORD': 'luismywaifu07',
-            'HOST': ''  # mặc định localhost
-        }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'buslinedb',
+        'USER': 'root',
+        'PASSWORD': 'luismywaifu07',
+        'HOST': ''  # mặc định localhost
+    }
 }
 
 # Password validation
@@ -114,13 +123,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
-
+CORS_ALLOW_ALL_ORIGINS = True
 STATIC_URL = 'static/'
-
+INTERNAL_IPS = ['127.0.0.1']
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = 'buslines.User'
+
 CKEDITOR_UPLOAD_PATH = "ckeditor/busline/"
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dwzkrul3u',
+    'API_KEY': '913219746285675',
+    'API_SECRET': 'FzCjnKSXhh7AUfxw3Zi2WHi1rDM',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
