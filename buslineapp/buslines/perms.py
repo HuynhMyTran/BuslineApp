@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
 
-class OwnerPermission(permissions.IsAuthenticated):
-    def has_object_permission(self, request, view, obj):
-        return self.has_permission(request, view) and request.user == obj.user
+class CommentOwner(permissions.IsAuthenticated):
+    def has_object_permission(self, request, view, comment):
+        return request.user and request.user == comment.user

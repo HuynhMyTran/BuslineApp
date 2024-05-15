@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'debug_toolbar',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +92,17 @@ DATABASES = {
         'HOST': ''  # mặc định localhost
     }
 }
-
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+    'DEFAULT_PAGINATION_CLASS':
+        'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    )
+}
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -143,3 +154,5 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+CLIENT_ID = 'LNEBgG9AM5tYI7Ut8XRU0Var8nK1yrUpMFrNETYz'
+CLIENT_SECRET = 'FEzrL7dcCgbO7xB4c1kFMJSEIsE1Zdhx2ypMnNKC6ecY9lfYWaO2lkPpO9nSoanyqDVYrpqyZv8CsJoY7adq5PU7E5rLKwWrOhTggqal7nWODTojyLAjKuwRRWaCV0hr'

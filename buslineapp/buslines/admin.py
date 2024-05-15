@@ -1,13 +1,27 @@
-from django.contrib import admin
-from django.template.response import TemplateResponse
-from django.urls import path
-from django.contrib.auth.models import Permission
+
+from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
-from django.utils.html import mark_safe
 
 # Register your models here.
-from .models import Category, User
-    # , Route
+from django.contrib import admin
+
+from .models import Category, User, Route, Buses
+
+
+class UserForm(forms.ModelForm):
+    description = forms.CharField(widget=CKEditorUploadingWidget)
+
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'email', 'is_staff', 'avatar', 'status']
+
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['id', 'first_name', 'last_name', 'email', 'is_active', 'is_staff', 'avatar']
+    search_fields = ['id', 'first_name', 'last_name', 'email', ]
+    form = UserForm
+
+
 
 # class BuslineAppAdminSite(admin.AdminSite):
 #     site_header = "HỆ THỐNG QUẢN LÝ ĐẶT VÉ XE"
@@ -26,5 +40,6 @@ from .models import Category, User
 
 
 admin.site.register(Category)
-# admin.site.register(Route)
-admin.site.register(User)
+admin.site.register(Route)
+admin.site.register(Buses)
+admin.site.register(User, UserAdmin)
