@@ -4,7 +4,8 @@ export default MyStyle = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "top",
-        alignItems:"center",
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor:"lightblue",
     },
 
